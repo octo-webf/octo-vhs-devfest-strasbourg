@@ -1,0 +1,59 @@
+{
+  "name": "octoflix",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint && yarn stylelint 'src/**/*.vue'",
+    "cost": "webpack -p --json > stats.json && webpack-bundle-analyzer stats.json",
+    "initworker": "curl --silent",
+    "ci:validation": "gitlab-ci-validate",
+    "lighthouse": "lighthouse-ci --performance=80 --pwa=100",
+    "test:unit": "vue-cli-service test:unit",
+    "test:coverage": "vue-cli-service test:unit --no-cache --coverage",
+    "test:ci": "vue-cli-service test:unit --no-cache --coverage",
+    "test:dev": "vue-cli-service test:unit --no-cache  --coverage --runInBand --detectOpenHandles --verbose",
+    "start": "node server.js",
+    "postinstall": "npm run build"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "core-js": "^2.6.5",
+    "express": "^4.16.4",
+    "register-service-worker": "^1.6.2",
+    "serve-static": "^1.13.2",
+    "vue": "^2.6.6",
+    "vue-analytics": "^5.16.4",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.5.0",
+    "@vue/cli-plugin-eslint": "^3.5.0",
+    "@vue/cli-plugin-pwa": "^3.5.0",
+    "@vue/cli-plugin-unit-jest": "3.11.0",
+    "@vue/cli-service": "^3.5.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.8.0",
+    "eslint": "6.3.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "gitlab-ci-validate": "^0.3.0",
+    "jest-plugin-context": "^2.9.0",
+    "lighthouse-ci": "^1.9.0",
+    "nyc": "^14.1.1",
+    "sinon": "^7.3.2",
+    "stylelint": "^10.1.0",
+    "vue-template-compiler": "^2.5.21",
+    "webpack-cli": "^3.3.8",
+    "webpagetest": "^0.3.9",
+    "workbox-webpack-plugin": "^4.2.0"
+  },
+  "gitHooks": {
+    "pre-commit": "yarn ci:validation && yarn lint",
+    "pre-push": "yarn ci:validation && yarn test:ci"
+  }
+}
