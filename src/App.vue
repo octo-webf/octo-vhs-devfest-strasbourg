@@ -12,20 +12,17 @@
     <nav-bar v-else></nav-bar>
     <div v-if="this.getCategoryName" class="headline">{{this.getCategoryName}}</div>
     <router-view/>
-    <sw-informations/>
   </div>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue'
-import swInformations from '@/components/swInformations/'
 import octotvServices from './services/octotv'
 
 export default {
   name: 'app',
   components: {
-    NavBar,
-    swInformations
+    NavBar
   },
   computed: {
     categoryId () {
@@ -37,11 +34,6 @@ export default {
     },
     isHome () {
       return this.$route && this.$route.name === 'home'
-    }
-  },
-  beforeMount () {
-    if (!localStorage.videos) {
-      localStorage.videos = JSON.stringify({})
     }
   }
 }

@@ -7,14 +7,12 @@ import octotvServices from '../../services/octotv'
 describe('Video.vue', () => {
   let sandbox,
     octotvserviceGetVideoInformationsStub,
-    octotvserviceGetVideoURLStub,
-    windowStub
+    octotvserviceGetVideoURLStub
 
   const stubs = { 'video-layout': true }
 
   beforeEach(() => {
     sandbox = sinon.createSandbox()
-    windowStub = sinon.stub()
   })
 
   afterEach(() => {
@@ -50,16 +48,7 @@ describe('Video.vue', () => {
       })
       expect(octotvserviceGetVideoInformationsStub.calledOnce).toBe(true)
     })
-    it('should call the URL getter of octotv service once on mount', async () => {
-      global.window.addEventListener = windowStub
-      await shallowMount(Video, {
-        computed: {
-          videoId: () => 1
-        },
-        stubs: ['video-layout']
-      })
-      expect(windowStub.called).toBe(true)
-    })
+
     it('should call the URL getter of octotv service once on mount', async () => {
       const wrapper = await shallowMount(Video, {
         computed: {

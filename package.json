@@ -53,7 +53,7 @@
     "workbox-webpack-plugin": "^4.2.0"
   },
   "gitHooks": {
-    "pre-commit": "yarn ci:validation && yarn lint",
-    "pre-push": "yarn ci:validation && yarn test:ci"
+    "pre-commit": "yarn lint",
+    "pre-push": "yarn test:ci"
   }
 }

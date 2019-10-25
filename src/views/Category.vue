@@ -31,9 +31,6 @@ export default {
   },
   async created () {
     this.videos = await octotvServices.getVideos(this.$route.params.categoryId)
-  },
-  beforeMount () {
-    this.localVideos = JSON.parse(localStorage.videos)
   }
 }
 </script>

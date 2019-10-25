@@ -1,8 +1,6 @@
 <script>
 import octotvServices from '../services/octotv'
 import VideoLayout from '../components/VideoLayout/index.vue'
-import nativeUI from '../services/nativeUI'
-const SHARE_MESSAGE = 'va voir cette vidéo sur OctoVHS, elle est super'
 // import EndVideoLayout from '../components/EndVideoLayout/index.vue'
 export default {
   name: 'Video',
@@ -20,13 +18,11 @@ export default {
       },
       timeToRetrieve: null,
       video: null,
-      displayOverlay: true,
-      localVideos: []
+      displayOverlay: true
     }
   },
   async created () {
     try {
-      window.addEventListener('keydown', this.onkey)
       this.video = await octotvServices.getVideoInformations(this.videoId)
     } catch (e) {
       this.status.apiError = true
@@ -35,29 +31,18 @@ export default {
       this.status.apiLoaded = true
     }
   },
-  beforeMount () {
-    const videoId = this.videoId
-    this.localVideos = JSON.parse(localStorage.videos)
-    this.localVideos[videoId] = this.localVideos[videoId] || {}
-    if (this.localVideos[videoId].time) {
-      this.timeToRetrieve = this.localVideos[videoId].time
-    }
-  },
   computed: {
     videoId () {
       return this.$route.params.videoId
     },
     infos () {
       return {
-        currentTime: (this.localVideos[this.videoId] && this.localVideos[this.videoId].time) || (this.$refs.video && this.$refs.video.currentTime),
+        currentTime: this.$refs.video && this.$refs.video.currentTime,
         volume: this.$refs.video && this.$refs.video.volume
       }
     }
   },
   methods: {
-    shareVideo () {
-      nativeUI.share(this.title, SHARE_MESSAGE)
-    },
     retrieveCurrentStorredTime (videoId = this.videoId) {
       if (this.$refs.video) {
         this.$refs.video.currentTime = this.timeToRetrieve
@@ -81,8 +66,6 @@ export default {
         return false
       }
       const time = event.target.currentTime
-      this.localVideos[this.videoId].time = time
-      localStorage.videos = JSON.stringify(this.localVideos)
       this.infos.currentTime = time
       this.$refs.videoLayout.updateTime()
     },
@@ -120,30 +103,7 @@ export default {
       this.$refs.video.volume = volume
       this.infos.volume = volume
       this.$refs.videoLayout.updateVolume()
-    },
-    onkey (event) {
-      if (event.code === 'Space') {
-        this.playOrPauseVideo()
-      }
-      if (event.code === 'Backspace') {
-        this.goBack()
-      }
-      if (event.code === 'ArrowRight') {
-        this.moveTimeFromVideo(10)
-      }
-      if (event.code === 'ArrowLeft') {
-        this.moveTimeFromVideo(-10)
-      }
-      if (event.code === 'ArrowUp') {
-        this.moveVolume(5)
-      }
-      if (event.code === 'ArrowDown') {
-        this.moveVolume(-5)
-      }
     }
-  },
-  beforeDestroy: function () {
-    window.removeEventListener('keydown', this.onkey)
   }
 }
 </script>
@@ -172,7 +132,6 @@ export default {
      @moveTime="moveTimeFromVideo"
      @download="download()"
      @changeScreenSize="changeFullScreenStatus()"
-     @share="shareVideo()"
      ></video-layout>
       <div class="video--container full-screen">
         <video

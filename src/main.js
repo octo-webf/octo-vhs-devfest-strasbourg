@@ -3,7 +3,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import VueAnalytics from 'vue-analytics'
-import './initialization'
 Vue.config.productionTip = false
 // we should put the id in the env files to get an analytics id on each env
 Vue.use(VueAnalytics, { id: 'UA-140034321-1', router })
