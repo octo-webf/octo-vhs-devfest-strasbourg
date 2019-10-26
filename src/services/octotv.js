@@ -1,5 +1,5 @@
 import axios from 'axios'
-const OCTO_VHS_API = 'http://api-octovhs.herokuapp.com'
+const OCTO_VHS_API = 'https://api-octovhs.herokuapp.com'
 const categoryList = {
 //  c124ccf81539cwmir14k: { name: 'Actualités' },
   c124cd0c0f8f2cu50e8j: { name: 'BOFs', img: '../images/bof.png' },
