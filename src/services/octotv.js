@@ -1,6 +1,5 @@
 import axios from 'axios'
-
-const OCTOTV_API = 'https://tv.octo.com/api/v2'
+const OCTO_VHS_API = 'http://api-octovhs.herokuapp.com'
 const categoryList = {
 //  c124ccf81539cwmir14k: { name: 'Actualités' },
   c124cd0c0f8f2cu50e8j: { name: 'BOFs', img: '../images/bof.png' },
@@ -8,7 +7,6 @@ const categoryList = {
   c124ccf81532boogbh2m: { name: 'Matinales', img: '../images/matinales.png' }
 //  c124f23e8c015v7knn09: { name: 'Octo Academy' }
 }
-const availableCategory = Object.keys(categoryList)
 
 const getCategoryInformations = (categoryOid) => {
   return categoryList[categoryOid]
@@ -16,12 +14,8 @@ const getCategoryInformations = (categoryOid) => {
 
 const getCategories = async () => {
   try {
-    const result = await axios.get(`${OCTOTV_API}/channels/tree/`)
-    if (!result.data || !result.data.success) {
-      throw new Error('Unknown error')
-    }
-    const availableCategoryToDisplay = result.data.channels.filter(channel => availableCategory.includes(channel.oid))
-    return availableCategoryToDisplay
+    const result = await axios.get(`${OCTO_VHS_API}/categories`)
+    return result.data
   } catch (e) {
     console.log(e)
     throw e
@@ -30,11 +24,8 @@ const getCategories = async () => {
 
 const getVideos = async categoryId => {
   try {
-    const result = await axios.get(`${OCTOTV_API}/channels/content/?parent_oid=${categoryId}`)
-    if (!result.data || !result.data.success) {
-      throw new Error('Unknown error')
-    }
-    return result.data.videos
+    const result = await axios.get(`${OCTO_VHS_API}/categories/${categoryId}/videos`)
+    return result.data
   } catch (e) {
     console.log(e)
     throw e
@@ -42,11 +33,8 @@ const getVideos = async categoryId => {
 }
 
 const getVideoInformations = async videoId => {
-  const result = await axios.get(`${OCTOTV_API}/medias/modes/?oid=${videoId}&html5=mp4`)
-  if (!result.data || !result.data.success || result.data.names.length === 0) {
-    throw new Error('Unknown error')
-  }
-  return Promise.resolve(result.data)
+  const result = await axios.get(`${OCTO_VHS_API}/videos/${videoId}`)
+  return result.data
 }
 
 const getVideoURL = video => {
