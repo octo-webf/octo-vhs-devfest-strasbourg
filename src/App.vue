@@ -5,6 +5,7 @@
         <img src="./assets/headerLogo.png" alt=""/>
       </div>
       <div class="abstract-text">
+        <p>Test review app</p>
         <p>OctoVHS est une plateforme de visionnage en streaming d'octo.</p>
         <p>Que souhaitez vous regarder maintenant ?</p>
       </div>
