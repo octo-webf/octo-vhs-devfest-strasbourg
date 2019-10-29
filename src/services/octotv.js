@@ -32,8 +32,8 @@ const getVideos = async categoryId => {
   }
 }
 
-const getVideoInformations = async videoId => {
-  const result = await axios.get(`${OCTO_VHS_API}/videos/${videoId}`)
+const getVideoInformations = async (videoId, categoryId) => {
+  const result = await axios.get(`${OCTO_VHS_API}/categories/${categoryId}/videos/${videoId}`)
   return result.data
 }
 

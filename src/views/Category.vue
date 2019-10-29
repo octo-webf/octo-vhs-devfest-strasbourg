@@ -1,7 +1,7 @@
 <template>
   <div>
     <article v-for="video in videos" :key="video.oid">
-      <router-link :to="{ name: 'video', params: { videoId: video.oid } }" class="shortcut-container">
+      <router-link :to="{ name: 'video', params: { categoryId: categoryId ,videoId: video.oid } }" class="shortcut-container">
         <img alt="play" class="playHover" src="../assets/pictos/circle-play.svg">
         <figure class="growsandstays">
           <img :src="video.thumb" :alt="video.title">
@@ -27,6 +27,11 @@ export default {
   methods: {
     convertVideoTime (time) {
       return octotvServices.getVideoTime(time)
+    }
+  },
+  computed: {
+    categoryId () {
+      return this.$route.params.categoryId
     }
   },
   async created () {

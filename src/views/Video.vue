@@ -23,7 +23,7 @@ export default {
   },
   async created () {
     try {
-      this.video = await octotvServices.getVideoInformations(this.videoId)
+      this.video = await octotvServices.getVideoInformations(this.videoId, this.categoryId)
     } catch (e) {
       this.status.apiError = true
       this.status.errorMessage = e
@@ -34,6 +34,9 @@ export default {
   computed: {
     videoId () {
       return this.$route.params.videoId
+    },
+    categoryId () {
+      return this.$route.params.categoryId
     },
     infos () {
       return {
@@ -135,13 +138,12 @@ export default {
      ></video-layout>
       <div class="video--container full-screen">
         <video
-        @loadstart="retrieveCurrentStorredTime()"
         @timeupdate="updateCurrentTime"
         @click="changeOverlayVisibility()"
         class="full-screen"
         ref="video"
         poster="../assets/chargement.gif"
-        :src="getVideoURL()"
+        :src="video.url"
         ></video>
       </div>
     </div>

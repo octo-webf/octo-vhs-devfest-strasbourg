@@ -19,7 +19,7 @@ export default new Router({
       component: Category
     },
     {
-      path: '/video/:videoId',
+      path: '/category/:categoryId/video/:videoId',
       name: 'video',
       component: Video
     }
