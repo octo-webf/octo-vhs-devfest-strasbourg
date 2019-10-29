@@ -5,7 +5,7 @@
         <img alt="play" class="playHover" src="../assets/pictos/circle-play.svg">
         <figure class="growsandstays">
           <img :src="video.thumb" :alt="video.title">
-          <progress :max="convertVideoTime(video.duration)" :value="localVideos && localVideos[video.oid] && Math.abs(localVideos[video.oid].time)"></progress>
+          <progress :max="video.duration"></progress>
           <figcaption> <span class="fig-title"> {{video.title }}</span></figcaption>
         </figure>
       </router-link>
@@ -22,11 +22,6 @@ export default {
     return {
       videos: undefined,
       localVideos: undefined
-    }
-  },
-  methods: {
-    convertVideoTime (time) {
-      return octotvServices.getVideoTime(time)
     }
   },
   computed: {

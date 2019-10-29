@@ -37,24 +37,9 @@ const getVideoInformations = async (videoId, categoryId) => {
   return result.data
 }
 
-const getVideoURL = video => {
-  return video && video.names && video.names[0] && video[video.names[0]] && video[video.names[0]].html5
-}
-
-const calculateTime = (minutes, seconds) => {
-  return minutes * 60 + seconds
-}
-const getVideoTime = time => {
-  const minutes = parseInt(time.replace(/(\d{2}) m (\d{2}) s/, '$1'))
-  const seconds = parseInt(time.replace(/(\d{2}) m (\d{2}) s/, '$2'))
-  return calculateTime(minutes, seconds)
-}
-
 export default {
   getCategories,
   getCategoryInformations,
   getVideoInformations,
-  getVideos,
-  getVideoTime,
-  getVideoURL
+  getVideos
 }

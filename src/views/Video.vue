@@ -1,7 +1,6 @@
 <script>
 import octotvServices from '../services/octotv'
 import VideoLayout from '../components/VideoLayout/index.vue'
-// import EndVideoLayout from '../components/EndVideoLayout/index.vue'
 export default {
   name: 'Video',
   components: {
@@ -23,7 +22,7 @@ export default {
   },
   async created () {
     try {
-      this.video = await octotvServices.getVideoInformations(this.videoId, this.categoryId)
+      this.video = await octotvServices.getVideoInformations(this.$route.params.videoId, this.$route.params.categoryId)
     } catch (e) {
       this.status.apiError = true
       this.status.errorMessage = e
@@ -32,12 +31,6 @@ export default {
     }
   },
   computed: {
-    videoId () {
-      return this.$route.params.videoId
-    },
-    categoryId () {
-      return this.$route.params.categoryId
-    },
     infos () {
       return {
         currentTime: this.$refs.video && this.$refs.video.currentTime,
@@ -46,20 +39,11 @@ export default {
     }
   },
   methods: {
-    retrieveCurrentStorredTime (videoId = this.videoId) {
-      if (this.$refs.video) {
-        this.$refs.video.currentTime = this.timeToRetrieve
-        this.timeToRetrieve = null
-      }
-    },
     manualTimeChanged (time) {
       this.$refs.video.currentTime = time
     },
     changeOverlayVisibility () {
       this.displayOverlay = !this.displayOverlay
-    },
-    getVideoURL () {
-      return octotvServices.getVideoURL(this.video)
     },
     updateCurrentTime (event) {
       if (this.timeToRetrieve) {
