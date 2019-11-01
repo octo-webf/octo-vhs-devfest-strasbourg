@@ -10,14 +10,12 @@
       </div>
     </div>
     <nav-bar v-else></nav-bar>
-    <div v-if="this.getCategoryName" class="headline">{{this.getCategoryName}}</div>
     <router-view/>
   </div>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue'
-import octotvServices from './services/octotv'
 
 export default {
   name: 'app',
@@ -25,13 +23,6 @@ export default {
     NavBar
   },
   computed: {
-    categoryId () {
-      return this.$route.params && this.$route.params.categoryId
-    },
-    getCategoryName () {
-      const category = octotvServices.getCategoryInformations(this.categoryId)
-      return category && category.name
-    },
     isHome () {
       return this.$route && this.$route.name === 'home'
     }
@@ -64,11 +55,6 @@ header {
   left: 0;
   right: 0;
   background: rgba(1,1,1, 0.5);
-}
-.headline {
-  padding-top: 50px;
-  font-size: 3.5vw;
-  text-align: center;
 }
 .headlogo img{
   max-height: 20vh;

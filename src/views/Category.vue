@@ -1,7 +1,8 @@
 <template>
   <div>
+    <div v-if="category" class="headline">{{category.name}}</div>
     <article v-for="video in videos" :key="video.oid">
-      <router-link :to="{ name: 'video', params: { categoryId: categoryId ,videoId: video.oid } }" class="shortcut-container">
+      <router-link :to="{ name: 'video', params: { categoryId: category.id,videoId: video.oid } }" class="shortcut-container">
         <img alt="play" class="playHover" src="../assets/pictos/circle-play.svg">
         <figure class="growsandstays">
           <img :src="video.thumb" :alt="video.title">
@@ -21,21 +22,23 @@ export default {
   data () {
     return {
       videos: undefined,
-      localVideos: undefined
-    }
-  },
-  computed: {
-    categoryId () {
-      return this.$route.params.categoryId
+      localVideos: undefined,
+      category: null
     }
   },
   async created () {
+    this.category = await octotvServices.getCategoryInformations(this.$route.params.categoryId)
     this.videos = await octotvServices.getVideos(this.$route.params.categoryId)
   }
 }
 </script>
 
 <style>
+.headline {
+  padding-top: 50px;
+  font-size: 3.5vw;
+  text-align: center;
+}
 progress {
   display: block;
   width: 100%;

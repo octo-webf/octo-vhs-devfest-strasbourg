@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <router-link v-for="category in categories" :key="category.oid" :to="{ name: 'category', params: { categoryId: category.oid } }" class="category-link">
+    <router-link v-for="category in categories" :key="category.id" :to="{ name: 'category', params: { categoryId: category.id } }" class="category-link">
       <div class="img-wrapper">
-        <img :src="getCategoryInformations(category.oid).img" :alt="category.title" class="image-category">
+        <img :src="category.img" :alt="category.title" class="image-category">
       </div>
       <div class="category-title">{{ category.title }}</div>
     </router-link>
@@ -17,11 +17,6 @@ export default {
   data () {
     return {
       categories: undefined
-    }
-  },
-  methods: {
-    getCategoryInformations (oid) {
-      return octotvServices.getCategoryInformations(oid)
     }
   },
   async created () {
