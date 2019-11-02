@@ -6,7 +6,7 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest)
 
 workbox.routing.registerRoute(
   /^(https:\/\/api-octovhs.herokuapp.com\/(.)*\/categories\/(.)*\/videos\/)/,
-  new workbox.strategies.NetworkFirst({
+  new workbox.strategies.StaleWhileRevalidate({
     plugins: [new workbox.cacheableResponse.Plugin({ statuses: [0, 200] })]
   }),
   'GET'
