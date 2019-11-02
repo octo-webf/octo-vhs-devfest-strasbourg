@@ -27,9 +27,23 @@ export default {
     }
   },
   async created () {
+    const updatesChannel = new BroadcastChannel('update-video')
+    console.log("up", updatesChannel)
+    updatesChannel.addEventListener('message', async (event) => {
+      console.log("e ent", event)
+      const { cacheName, updatedUrl } = event.data.payload
+
+      // Do something with cacheName and updatedUrl.
+      // For example, get the cached content and update
+      // the content on the page.
+      const cache = await caches.open(cacheName)
+      const updatedResponse = await cache.match(updatedUrl)
+      const updatedText = await updatedResponse.text()
+      console.log("updated", updatedText)
+    })
     this.category = await octotvServices.getCategoryInformations(this.$route.params.categoryId)
     this.videos = await octotvServices.getVideos(this.$route.params.categoryId)
-  }
+  } 
 }
 </script>
 

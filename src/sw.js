@@ -7,7 +7,13 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest)
 workbox.routing.registerRoute(
   /^(https:\/\/api-octovhs.herokuapp.com\/(.)*\/categories\/(.)*\/videos\/)/,
   new workbox.strategies.StaleWhileRevalidate({
-    plugins: [new workbox.cacheableResponse.Plugin({ statuses: [0, 200] })]
+    plugins: [
+      new workbox.cacheableResponse.Plugin({ statuses: [0, 200] }),
+      new workbox.broadcastUpdate.Plugin({
+        channelName: 'update-video',
+        headersToCheck: ['date']
+      })
+    ]
   }),
   'GET'
 )
