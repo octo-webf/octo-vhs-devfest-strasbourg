@@ -11,6 +11,7 @@ const getCategoryInformations = async (id) => {
   }
 }
 
+// the api call will be  cached (cache first)
 const getCategories = async () => {
   try {
     const result = await axios.get(`${OCTO_VHS_API}/categories`)
