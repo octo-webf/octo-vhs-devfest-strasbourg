@@ -5,7 +5,7 @@
         <img src="./assets/headerLogo.png" alt=""/>
       </div>
       <div class="abstract-text">
-        <p>OctoVHS est une plateforme de visionnage en streaming d'octo.</p>
+        <p>OctoVHS est une {{ plateform }} de visionnage en streaming d'octo.</p>
         <p>Que souhaitez vous regarder maintenant ?</p>
       </div>
     </div>
@@ -28,6 +28,12 @@ export default {
   computed: {
     isHome () {
       return this.$route && this.$route.name === 'home'
+    },
+    plateform () {
+      if (this.$route.query.pwa) {
+        return 'application'
+      }
+      return 'plateforme'
     }
   }
 }
