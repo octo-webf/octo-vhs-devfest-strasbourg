@@ -18,3 +18,14 @@ workbox.routing.registerRoute(
   }),
   'GET'
 )
+const bgSyncPlugin = new workbox.backgroundSync.Plugin('analytics', {
+  maxRetentionTime: 24 * 60 // Retry for max of 24 Hours (specified in minutes)
+})
+
+workbox.routing.registerRoute(
+  /.*analytics.*/,
+  new workbox.strategies.NetworkOnly({
+    plugins: [bgSyncPlugin]
+  }),
+  'GET'
+)
