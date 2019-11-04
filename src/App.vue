@@ -11,16 +11,19 @@
     </div>
     <nav-bar v-else></nav-bar>
     <router-view/>
+    <sw-informations/>
   </div>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue'
+import SwInformations from '@/components/SwInformations/'
 
 export default {
   name: 'app',
   components: {
-    NavBar
+    NavBar,
+    SwInformations
   },
   computed: {
     isHome () {
