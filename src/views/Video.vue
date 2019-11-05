@@ -1,6 +1,9 @@
 <script>
 import octotvServices from '../services/octotv'
 import VideoLayout from '../components/VideoLayout/index.vue'
+import nativeUI from '../services/nativeUI'
+const SHARE_MESSAGE = 'va voir cette vidéo sur OctoVHS, elle est super'
+
 export default {
   name: 'Video',
   components: {
@@ -69,6 +72,9 @@ export default {
       }
       this.status.fullScreened = !this.status.fullScreened
     },
+    shareVideo () {
+      nativeUI.share(this.title, SHARE_MESSAGE)
+    },
     playOrPauseVideo () {
       if (!this.status.launched) {
         this.$refs.video.play()
@@ -121,6 +127,7 @@ export default {
      @moveTime="moveTimeFromVideo"
      @download="download()"
      @changeScreenSize="changeFullScreenStatus()"
+     @share="shareVideo()"
      ></video-layout>
       <div class="video--container full-screen">
         <video
