@@ -1,6 +1,6 @@
 <template>
   <aside class="information__block" v-show="isOutdated || isOffline" @click="isOutdated && updatePage()">
-    <div v-if="isOutdated">Une mise à jour est disponible, cliquez sur le block pour mettre à jour l'application.</div>
+    <div v-if="isOutdated">Une mise à jour est disponible, cliquez sur le bloc pour mettre à jour l'application.</div>
     <div v-if="isOffline">Vous naviguez actuellement en mode hors ligne.</div>
   </aside>
 </template>
