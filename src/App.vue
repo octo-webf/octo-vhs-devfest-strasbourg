@@ -7,6 +7,7 @@
       <div class="abstract-text">
         <p>OctoVHS est une {{ plateform }} de visionnage en streaming d'octo.</p>
         <p>Que souhaitez vous regarder maintenant ?</p>
+        <experimental-u-i></experimental-u-i>
       </div>
     </div>
     <nav-bar v-else></nav-bar>
@@ -18,12 +19,13 @@
 <script>
 import NavBar from '@/components/NavBar.vue'
 import SwInformations from '@/components/SwInformations/'
-
+import ExperimentalUI from '@/components/experimentalUI/ExperimentalUI';
 export default {
   name: 'app',
   components: {
     NavBar,
-    SwInformations
+    SwInformations,
+    ExperimentalUI
   },
   computed: {
     isHome () {
