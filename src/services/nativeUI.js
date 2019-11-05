@@ -11,6 +11,12 @@ export default {
   },
   vibrate: duration => {
     navigator.vibrate(duration)
+  },
+  getBattery: async () => {
+    if ('getBattery' in navigator) {
+      return navigator.getBattery()
+    } else {
+      Promise.resolve(navigator.battery)
+    }
   }
-
 }
