@@ -19,7 +19,7 @@
 <script>
 import NavBar from '@/components/NavBar.vue'
 import SwInformations from '@/components/SwInformations/'
-import ExperimentalUI from '@/components/experimentalUI/ExperimentalUI';
+import ExperimentalUI from '@/components/experimentalUI/ExperimentalUI'
 export default {
   name: 'app',
   components: {

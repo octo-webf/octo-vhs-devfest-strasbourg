@@ -2,6 +2,7 @@
   <div class="experimental">
     <p>début experimentation</p>
     <button v-if="canShare()" @click="share()">partage</button>
+    <button v-if="canVibrate()" @click="vibrate()">vibrer</button>
     <p>fin de l'experimentation</p>
   </div>
 </template>
@@ -16,6 +17,12 @@ export default {
     },
     share () {
       nativeUI.share()
+    },
+    canVibrate () {
+      return nativeUI.canVibrate()
+    },
+    vibrate () {
+      nativeUI.vibrate(500)
     }
   }
 }
@@ -28,7 +35,7 @@ button {
   text-align: center;
   margin: 1em auto;
 }
-  .experimental {
-    color: grey;
-  }
+.experimental {
+  color: grey;
+}
 </style>
