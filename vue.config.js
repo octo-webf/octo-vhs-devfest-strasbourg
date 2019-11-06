@@ -9,17 +9,17 @@ module.exports = {
         swDest: 'service-worker.js',
         clientsClaim: true,
         skipWaiting: true,
-          runtimeCaching: [
-            {
-              urlPattern: new RegExp(`^${urlAPIToCache}$`),
-              handler: 'networkFirst',
-              options: {
-                cacheableResponse: {
-                  statuses: [0, 200]
-                }
+        runtimeCaching: [
+          {
+            urlPattern: new RegExp(`^${urlAPIToCache}$`),
+            handler: 'networkFirst',
+            options: {
+              cacheableResponse: {
+                statuses: [0, 200]
               }
             }
-          ]
+          }
+        ]
       }
       )
     ]
