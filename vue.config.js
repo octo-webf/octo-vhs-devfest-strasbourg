@@ -1,6 +1,6 @@
 const WorkboxPlugin = require('workbox-webpack-plugin')
 const OCTO_VHS_API = 'https://api-octovhs.herokuapp.com'
-const urlAPIToCache = `(${OCTO_VHS_API}/(.)*/categories/(.)*/videos/)`
+const urlAPIToCache = `(${OCTO_VHS_API}/categories/(.)*/videos)`
 
 module.exports = {
   configureWebpack: {
@@ -11,7 +11,7 @@ module.exports = {
         skipWaiting: true,
           runtimeCaching: [
             {
-              urlPattern: new RegExp(`^${urlAPIToCache}`),
+              urlPattern: new RegExp(`^${urlAPIToCache}$`),
               handler: 'networkFirst',
               options: {
                 cacheableResponse: {
