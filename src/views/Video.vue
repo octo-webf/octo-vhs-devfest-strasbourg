@@ -21,6 +21,7 @@ export default {
     }
   },
   async created () {
+    // the api call will be cached (network first)
     try {
       this.video = await octotvServices.getVideoInformations(this.$route.params.videoId, this.$route.params.categoryId)
     } catch (e) {
@@ -29,6 +30,7 @@ export default {
     } finally {
       this.status.apiLoaded = true
     }
+    // the api call will be cached (network first)
   },
   computed: {
     infos () {

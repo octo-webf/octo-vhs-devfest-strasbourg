@@ -2,7 +2,7 @@
   <div>
     <div v-if="category" class="headline">{{category.name}}</div>
     <article v-for="video in videos" :key="video.oid">
-      <router-link :to="{ name: 'video', params: { categoryId: category.id,videoId: video.oid } }" class="shortcut-container">
+      <router-link :to="{ name: 'video', params: { categoryId: $route.params.categoryId,videoId: video.oid } }" class="shortcut-container">
         <img alt="play" class="playHover" src="../assets/pictos/circle-play.svg">
         <figure class="growsandstays">
           <img :src="video.thumb" :alt="video.title">
@@ -27,8 +27,12 @@ export default {
     }
   },
   async created () {
-    this.category = await octotvServices.getCategoryInformations(this.$route.params.categoryId)
-    this.videos = await octotvServices.getVideos(this.$route.params.categoryId)
+    try {
+      this.videos = await octotvServices.getVideos(this.$route.params.categoryId)
+      this.category = await octotvServices.getCategoryInformations(this.$route.params.categoryId)
+    } catch (e) {
+      console.error(e)
+    }
   }
 }
 </script>

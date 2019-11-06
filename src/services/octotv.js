@@ -30,7 +30,7 @@ const getVideos = async categoryId => {
     throw e
   }
 }
-
+// the api call will be cached (network first)
 const getVideoInformations = async (videoId, categoryId) => {
   const result = await axios.get(`${OCTO_VHS_API}/categories/${categoryId}/videos/${videoId}`)
   return result.data
