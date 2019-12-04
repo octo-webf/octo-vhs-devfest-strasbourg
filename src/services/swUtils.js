@@ -5,5 +5,8 @@ export default {
 
   setAppOnlineStatus () {
     store.dispatch('setOnlineStatus', navigator.onLine)
+  },
+  setUpdateAvailable () {
+    store.dispatch('setUpdateAvailable')
   }
 }

@@ -41,5 +41,16 @@ describe('#setAppOnlineStatus', () => {
         })
       })
     })
+
+    describe('#setUpdateAvailable', () => {
+      it('should call store.dispatch Once', () => {
+        swUtils.setUpdateAvailable()
+        expect(store.dispatch.calledOnce).toBe(true)
+      })
+      it('should have call dispatch setUpdateAvailable', () => {
+        swUtils.setUpdateAvailable()
+        expect(store.dispatch.firstCall.args[0]).toBe('setUpdateAvailable')
+      })
+    })
   })
 })
