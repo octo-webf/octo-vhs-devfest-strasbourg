@@ -12,7 +12,16 @@ module.exports = {
         runtimeCaching: [
           {
             urlPattern: new RegExp(`^${urlAPIToCache}$`),
-            handler: 'networkFirst',
+            handler: 'NetworkFirst',
+            options: {
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          },
+          {
+            urlPattern: new RegExp(`^(${OCTO_VHS_API}/categories)`),
+            handler: 'CacheFirst',
             options: {
               cacheableResponse: {
                 statuses: [0, 200]
